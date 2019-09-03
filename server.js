@@ -147,10 +147,10 @@ app.post('/users', jsonParser, async (req, res, next) => {
     const collection = db.collection('users')
 
     const users = {
-        create: function(name, loans) {
+        create: function(name, ingredients) {
           const user = {
             user: name,
-            loans: loans
+            ingredients: ingredients
           };
           return user
         }
