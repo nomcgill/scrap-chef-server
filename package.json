@@ -1,13 +1,12 @@
 {
   "name": "scrap-chef-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "config.js",
+  "description": "Kitchen app used to search recipes based on ingredients alreday in your kitchen.",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
@@ -22,12 +21,21 @@
   "homepage": "https://github.com/nomcgill/scrap-chef-server#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "mongoose": "^5.6.11"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.11",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sweetalert": "^2.1.2",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "faker": "^4.1.0",
     "mocha": "^6.2.0"
   }
 }
