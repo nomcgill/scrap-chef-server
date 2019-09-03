@@ -16,7 +16,7 @@ const { PORT, DATABASE_URL } = require('./config');
 const mongo = require('mongodb').MongoClient
 
 const app = express();
-// app.use(express.static("public"));
+app.use(express.static("public"));
 app.use(morgan('common'));
 
 app.use(function (req, res, next) {
