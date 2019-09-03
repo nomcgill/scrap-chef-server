@@ -16,7 +16,7 @@ const { PORT, DATABASE_URL } = require('./config');
 const mongo = require('mongodb').MongoClient
 
 const app = express();
-// app.use(express.static("public"));
+app.use(express.static("public"));
 app.use(morgan('common'));
 
 app.use(function (req, res, next) {
@@ -59,7 +59,7 @@ app.get(`/users/`, (req, res) => {
   }
 });
 
-//GET single object by username
+//GET single object by user
 app.get('/find', jsonParser, async (req, res, next) => {
   try {
   MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {    
@@ -70,12 +70,12 @@ app.get('/find', jsonParser, async (req, res, next) => {
     var myPromise = () => {
       return new Promise((resolve, reject) => {
         collection
-          .find({username: req.query.username})
+          .find({user: req.query.user})
           .limit(1)
           .toArray(function(err, data) {
             if (data.length === 0){
               reject(err)
-              return res.status(404).send("Username not found.");
+              return res.status(404).send("user not found.");
             }
             if (data.length === 1){
               resolve(
@@ -117,7 +117,7 @@ app.get(`/users/:id`, (req, res) => {
           .findOne({"_id": new ObjectId(req.params.id)}, function(err, data) {
               if (!(data)){
                 reject(err)
-                return res.status(404).send("Username not found.");
+                return res.status(404).send("user not found.");
               }
               else {
                 resolve(
@@ -138,7 +138,7 @@ app.get(`/users/:id`, (req, res) => {
     }
   });
 
-//POST a new username with any local ingredients included
+//POST a new user with any local ingredients included
 app.post('/users', jsonParser, async (req, res, next) => {
   try {
   MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {    
@@ -149,7 +149,7 @@ app.post('/users', jsonParser, async (req, res, next) => {
     const users = {
         create: function(name, loans) {
           const user = {
-            username: name,
+            user: name,
             loans: loans
           };
           return user
@@ -159,15 +159,15 @@ app.post('/users', jsonParser, async (req, res, next) => {
     var myPromise = () => {
       return new Promise((resolve, reject) => {
         collection
-          .find({username: req.body.username})
+          .find({user: req.body.user})
           .limit(1)
           .toArray(function(err, data) {
             if (data.length > 0){
-              reject("Username already exists.")
+              reject("user already exists.")
             }
             if (data.length === 0){
               resolve(
-                collection.insertOne(users.create(req.body.username, req.body.ingredients))
+                collection.insertOne(users.create(req.body.user, req.body.ingredients))
               );
               return res.json({message: "Successly POSTed!"})
             }
@@ -208,22 +208,22 @@ app.put('/users/:id', jsonParser, (req, res) => {
       var myPromise = () => {
         return new Promise((resolve, reject) => {
           collection
-           .find({username: req.body.username})
+           .find({user: req.body.user})
            .limit(1)
            .toArray(function(err, data) {
               if(data.length > 0){
                 if (data[0]._id.toString() !== req.params.id){
-                  reject(`Username ${req.body.username} does not match database ID.`)
+                  reject(`user ${req.body.user} does not match database ID.`)
                 }
                 else {
                   resolve (
-                    collection.updateOne({"username": req.body.username}, { $set: { "ingredients" : req.body.ingredients } }),
+                    collection.updateOne({"user": req.body.user}, { $set: { "ingredients" : req.body.ingredients } }),
                   )
                   return res.json({message: "Current hurdles have been saved!"})
                 }
               }
               if (data.length === 0){
-                reject(`Username in request wasn't found in database.`)
+                reject(`user in request wasn't found in database.`)
               }
               else {
                 reject("Something unexpected went wrong.")
