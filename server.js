@@ -31,6 +31,7 @@ app.use(function (req, res, next) {
 
 //GET list of entire collection. Reference array by response.items
 app.get(`/users/`, (req, res) => {
+    console.log("heard first")
   try {
     MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) { 
         console.log("heard")
