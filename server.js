@@ -55,7 +55,7 @@ app.get(`/users/`, (req, res) => {
 //       client.close();
 //     });
 //   } catch (e) {
-//   next(e)
+  next(e)
 //   }
 });
 
