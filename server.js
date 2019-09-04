@@ -31,13 +31,22 @@ app.use(function (req, res, next) {
 
 //GET list of entire collection. Reference array by response.items
 app.get(`/users/`, (req, res) => {
-    console.log("heard first")
   try {
     MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) { 
-        console.log("heard")
       assert.equal(null, err);
-      const db = client.db('my-kitchen')
-      const collection = db.collection('users')
+    //   const db = client.db('my-kitchen')
+    //   const collection = db.collection('users')
+    const collection = [
+        {
+            "_id": "5d6e4a371c9d440000bf1c2f",
+            "user": "Matilda",
+            "ingredients": [
+                "strawberry",
+                "milk",
+                "sugar"
+            ]
+        }
+    ]
   
       var myPromise = () => {
         return new Promise((resolve, reject) => {
