@@ -31,32 +31,32 @@ app.use(function (req, res, next) {
 
 //GET list of entire collection. Reference array by response.items
 app.get(`/users/`, (req, res) => {
-  try {
-    MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {    
-      assert.equal(null, err);
-      const db = client.db('my-kitchen')
-      const collection = db.collection('users')
+//   try {
+//     MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {    
+//       assert.equal(null, err);
+//       const db = client.db('my-kitchen')
+//       const collection = db.collection('users')
   
-      var myPromise = () => {
-        return new Promise((resolve, reject) => {
-          collection
-          .find().toArray((err, items) => {
-              err
-                ? reject(err)
-                : resolve(
-                  res.json(items).status(200).send()
-                );
-            });
-        }).catch(e => {
-          return false
-        })            
-      }
-      await myPromise() 
-      client.close();
-    });
-  } catch (e) {
-  next(e)
-  }
+//       var myPromise = () => {
+//         return new Promise((resolve, reject) => {
+//           collection
+//           .find().toArray((err, items) => {
+//               err
+//                 ? reject(err)
+//                 : resolve(
+//                   res.json(items).status(200).send()
+//                 );
+//             });
+//         }).catch(e => {
+//           return false
+//         })            
+//       }
+//       await myPromise() 
+//       client.close();
+//     });
+//   } catch (e) {
+//   next(e)
+//   }
 });
 
 //GET single object by user
