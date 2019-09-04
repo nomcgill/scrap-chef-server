@@ -89,6 +89,7 @@ app.get('/find', jsonParser, async (req, res, next) => {
             }
           });
       }).catch(e => {
+        res.json({message: e})
         return false
      })            
     }
@@ -128,7 +129,8 @@ app.get(`/users/:id`, (req, res) => {
            })
         })
         .catch(e => {
-           return false
+            res.json({message: e})
+          return false
         })            
       }
       await myPromise() 
@@ -177,7 +179,8 @@ app.post('/users', jsonParser, async (req, res, next) => {
             }
           });
         }).catch(e => {
-          return res.json({message: e})
+            res.json({message: e})
+          return false
       })            
     }
     await myPromise() 
@@ -231,7 +234,8 @@ app.put('/users/:id', jsonParser, (req, res) => {
               }
           });
         }).catch(e => {
-          return res.json({message: e})
+            res.json({message: e})
+          return false
       })            
     }
     await myPromise() 
