@@ -48,6 +48,7 @@ app.get(`/users/`, (req, res) => {
                 );
             });
         }).catch(e => {
+            res.json(e)
           return false
         })            
       }
