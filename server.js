@@ -32,43 +32,22 @@ app.use(function (req, res, next) {
 //GET list of entire collection. Reference array by response.items
 app.get(`/users/`, (req, res) => {
   try {
-    MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) { 
+    MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {    
       assert.equal(null, err);
-    //   const db = client.db('my-kitchen')
-    //   const collection = db.collection('users')
-    const collection = [{
-            "_id": "5d6e4a371c9d440000bf1c2f",
-            "user": "Matilda",
-            "ingredients": [
-                "strawberry",
-                "milk",
-                "sugar"
-            ]
-        },
-        {
-            "_id": "5d6e4a371c9d440000bf1c2f",
-            "user": "Matilda",
-            "ingredients": [
-                "strawberry",
-                "milk",
-                "sugar"
-            ]
-        }]
+      const db = client.db('my-kitchen')
+      const collection = db.collection('users')
+  
       var myPromise = () => {
         return new Promise((resolve, reject) => {
-            console.log(collection)
-        //   collection
-        //   .find().toArray((err, items) => {
-        //       err
-        //         ? reject(err)
-        //         : resolve(
-                    resolve(
-                  res.json(collection).status(200).send()
-                    );
-        //         );
-        //     });
+          collection
+          .find().toArray((err, items) => {
+              err
+                ? reject(err)
+                : resolve(
+                  res.json(items).status(200).send()
+                );
+            });
         }).catch(e => {
-            console.log(e)
           return false
         })            
       }
