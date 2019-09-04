@@ -36,7 +36,15 @@ app.get(`/users/`, (req, res) => {
       assert.equal(null, err);
     //   const db = client.db('my-kitchen')
     //   const collection = db.collection('users')
-    const collection = [
+    const collection = [{
+            "_id": "5d6e4a371c9d440000bf1c2f",
+            "user": "Matilda",
+            "ingredients": [
+                "strawberry",
+                "milk",
+                "sugar"
+            ]
+        },
         {
             "_id": "5d6e4a371c9d440000bf1c2f",
             "user": "Matilda",
@@ -45,20 +53,22 @@ app.get(`/users/`, (req, res) => {
                 "milk",
                 "sugar"
             ]
-        }
-    ]
-  
+        }]
       var myPromise = () => {
         return new Promise((resolve, reject) => {
-          collection
-          .find().toArray((err, items) => {
-              err
-                ? reject(err)
-                : resolve(
-                  res.json(items).status(200).send()
-                );
-            });
+            console.log(collection)
+        //   collection
+        //   .find().toArray((err, items) => {
+        //       err
+        //         ? reject(err)
+        //         : resolve(
+                    resolve(
+                  res.json(collection).status(200).send()
+                    );
+        //         );
+        //     });
         }).catch(e => {
+            console.log(e)
           return false
         })            
       }
