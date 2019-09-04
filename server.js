@@ -56,7 +56,7 @@ app.get(`/users/`, (req, res) => {
     });
   } catch (e) {
   next(e)
-//   }
+  }
 });
 
 //GET single object by user
