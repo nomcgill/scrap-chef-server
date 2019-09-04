@@ -48,7 +48,7 @@ app.get(`/users/`, (req, res) => {
                 );
             });
         }).catch(e => {
-            res.json(e)
+            res.json({message: e})
           return false
         })            
       }
@@ -63,7 +63,7 @@ app.get(`/users/`, (req, res) => {
 //GET single object by user
 app.get('/find', jsonParser, async (req, res, next) => {
   try {
-  MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {    
+  MongoClient.connect(DATABASE_URL, {useNewUrlParser: true}, async function(err, client) {   
     assert.equal(null, err);
     const db = client.db('my-kitchen')
     const collection = db.collection('users')
