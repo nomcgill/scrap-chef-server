@@ -169,8 +169,14 @@ app.post('/users', jsonParser, async (req, res, next) => {
             if (data.length === 0){
               resolve(
                 collection.insertOne(users.create(req.body.user, req.body.ingredients))
+                .then(data => {
+                  return res.json({
+                    message: "Successly POSTed!",
+                    insertedId: data.insertedId,
+                    newUser: req.body.user
+                  })
+                })
               );
-              return res.json({message: "Successly POSTed!"})
             }
             else {
               reject("Something unexpected went wrong.")
