@@ -177,14 +177,14 @@ app.post('/users', jsonParser, async (req, res, next) => {
             }
           });
         }).catch(e => {
-          return res.json({message: e})
+          return res.json({message: e}).status()
       })            
     }
     await myPromise() 
     client.close();
   });
   } catch (e) {
-    res.json({ message: `POST connection failed: ${e}`}).status(400)
+    res.json({ message: `POST connection failed: ${e}`}).status(409).send()
     next(e)
   }
 });
