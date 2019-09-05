@@ -164,7 +164,7 @@ app.post('/users', jsonParser, async (req, res, next) => {
           .limit(1)
           .toArray(function(err, data) {
             if (data.length > 0){
-              reject("user already exists.")
+              reject("User already exists.")
             }
             if (data.length === 0){
               resolve(
