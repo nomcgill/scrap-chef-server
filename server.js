@@ -220,7 +220,7 @@ app.put('/users/:id', jsonParser, (req, res) => {
                   resolve (
                     collection.updateOne({"user": req.body.user}, { $set: { "ingredients" : req.body.ingredients } }),
                   )
-                  return res.json({message: "Current hurdles have been saved!"})
+                  return res.json({message:"Profile saved."})
                 }
               }
               if (data.length === 0){
@@ -238,7 +238,7 @@ app.put('/users/:id', jsonParser, (req, res) => {
     client.close();
   });
   } catch (e) {
-    res.json({ message: `POST connection failed: ${e}`}).status(400)
+    res.json({ message: `PUT connection failed: ${e}`}).status(400)
     next(e)
   }
 });
